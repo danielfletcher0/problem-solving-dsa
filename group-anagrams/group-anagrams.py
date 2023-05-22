@@ -1,15 +1,13 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        mapp = defaultdict(list)
 
-        matching = defaultdict(list) #for mapping  charCount to list of anangrams
+        for word in strs:
+            count = [0] * 26
 
-        for i in strs:
-            count = [0] * 26 #represents the alphabet a - z
+            for char in word:
+                count[ord(char) - ord("a")] += 1
 
-            for c in i:
-                count[ord(c) - ord("a")] += 1 #Updates the count of the specific letter in the count array
-            
-            matching[tuple(count)].append(i)
-        
-        return matching.values()
-        
+            mapp[tuple(count)].append(word)
+
+        return mapp.values()
